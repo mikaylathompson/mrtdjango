@@ -14,6 +14,12 @@ class Post(models.Model):
 	def __unicode__(self):
 		return self.title
 
+	def next_id(self):
+		return self.id + 1
+
+	def prev_id(self):
+		return self.id - 1
+
 	def was_published_recently(self):
 		return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 

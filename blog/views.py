@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Comment, Tag
+from django.utils import timezone
 
 
 def index(request):
@@ -12,17 +13,8 @@ def index(request):
 
 def detail(request, post_id):
 	post = get_object_or_404(Post, pk=post_id)
-	comment_list = post.comment_set.order_by('-com_date')
-	# comment_list = []
-	# for c in post.comment_set.all():
-	# 	comment_list.append(c)
-
-
-	# comment_list = get_object_or_404(Post.objects.filter(id=post_id)[0].comment_set.all(), pk=post_id)
-	# comment_text = [].append([c.com_text for c in Post.objects.filter(id=post_id)[0].comment_set.all()])
-	# comment_auth = [].append([c.commentor for c in Post.objects.filter(id=post_id)[0].comment_set.all()])
-	# comment_date = [].append([c.com_date for c in Post.objects.filter(id=post_id)[0].comment_set.all()])
-	# render_hash = {'post': post, 'com_text': comment_text, 'commentor': comment_auth, 'com_date': comment_date}
-
+	if (request.POST):
+		post.comment_set.create(commentor=request.POST['name'], com_text=request.POST['comtext'], com_date=timezone.now())
+	comment_list = post.comment_set.order_by('com_date')
 	return render(request, 'blog/detail.html', {'post': post, 'comment_list': comment_list})
-
+	

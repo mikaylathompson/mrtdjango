@@ -1,11 +1,27 @@
-{% if latest_post_list %}
-<h1>Latest Blog Posts: </h1>
-	{% for post in latest_post_list %}
-		<a href="/blog/{{ post.id }}/">{{ post.title }}</a>
-		<br><em>by {{ post.author }}</em><br><br>
-	{% endfor %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Blogging Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href={% static 'blog/bootstrap.css' %} type = "text/css" rel="stylesheet" media="screen">
+  </head>
 
+
+<body>
+<div class="container">
+{% if latest_post_list %}
+	<h1>Latest Blog Posts: </h1>
+	{% for post in latest_post_list %}
+		<div class="hero-unit">
+			<h2><a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a></h2>
+			by {{ post.author }}
+		</div>
+	{% endfor %}
 {% else %}
 <h2>No posts have been written.</h2>
-
 {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,10 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ post.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'blog/bootstrap.css' %}" type = "text/css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+
+<div class="container">
+	<div class="row">
+		<div class="span9">
 <h1>{{ post.title }}</h1>
-<h3>By {{ post.author }}</h3>
+<h4>By {{ post.author }}</h4></div>
+<div class="span3"
+<br><br><h5>
+	{% if post.prev_id != 0 %}
+		<a href="{% url 'blog:detail' post.prev_id  %}">&lt&lt;Earlier Post</a> --- 
+	{% endif %}  
+	<a href="{% url 'blog:detail' post.next_id %}">Next Post &gt&gt</a></h5>
+</div>
+</div>
+<div class="row">
+<div class="span9 offset1">
 <p> {{ post.text }}</p>
+</div>
+</div>
+
+
 
 {% if comment_list %}
-<br><h2>Comments:</h2>
+<h3>Comments:</h3>
+
 	{% for c in comment_list %}
-		<em>{{ c.commentor }}</em>: <p>{{ c.com_text }}</p><br>
+	<div class="row">
+	<div class="span2 r-align"><strong>{{ c.commentor }}</strong>: </div>
+	<div class="span8"><p>{{ c.com_text }}</p></div>
+	</div>
 	{% endfor %}
 {% endif %}
+
+<h3>Add your voice:</h3>
+<form action="{% url 'blog:detail' post.id %}" method="post">
+	{% csrf_token %}
+	<div class="row">
+		<div class="span2 r-align">
+	Name:</div> <div class="span7"> <input type="text" class="input-xlarge" name="name" /> </div></div>
+	<div class="row"><div class="span2 r-align">
+	Comment:</div> <div class="span7"> <textarea class="input-xxlarge" name="comtext" rows="8" columns="100"></textarea> </div>
+</div><br>
+	<input type="submit"><br>
+</form>
+
+</div>
+
+</body>
+</html>
