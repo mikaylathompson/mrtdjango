@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Write a Blog Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href={% static 'blog/bootstrap.css' %} type = "text/css" rel="stylesheet" media="screen">
+  </head>
+
+<body>
+<br><div class="container">
+{% if post %}
+	<h1>Post submitted.</h1>
+	<div class="row"><div class="span2 r-align">
+	<strong>Author:<br></strong></div> <div class="span7"> {{ post.author }} <br></div></div>
+	
+	<div class="row"><div class="span2 r-align">
+	<strong>Title:<br></strong></div> <div class="span7"> {{ post.title }} <br></div></div>
+
+	<div class="row"><div class="span2 r-align">
+	<strong>Entry:<br></strong></div> <div class="span7"> {{ post.text|linebreaks }} <br></div></div>
+
+{% else %}
+	<h1>Write a new post:</h1>
+	<form action="{% url 'blog:write' %}" method="post">
+	{% csrf_token %}
+	<div class="row"><div class="span2 r-align">
+	Author:</div> <div class="span7"> <input type="text" class="input-xlarge" name="author" /> </div></div>
+	
+	<div class="row"><div class="span2 r-align">
+	Title:</div> <div class="span7"> <input type="text" class="input-xlarge" name="title" /> </div></div>
+
+	<div class="row"><div class="span2 r-align">
+	Entry:</div> <div class="span7"> <textarea class="input-xxlarge" name="text" rows="12" columns="100"></textarea> </div></div>
+	<div class="row"><div class="span3 offset2">
+	<input type="submit"></div></div>
+	<br>
+</form>
+{% endif %}
+
+</div>
+
+
+</body>
+</html>

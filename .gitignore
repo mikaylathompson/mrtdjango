@@ -1,4 +1,4 @@
-website/
-website/.DS_Store
+website/*
 
-website/mikaylathompson.github.io/
+venv
+*.pyc

@@ -23,7 +23,7 @@
 </div>
 <div class="row">
 <div class="span9 offset1">
-<p> {{ post.text }}</p>
+<p> {{ post.text|linebreaks }}</p>
 </div>
 </div>
 
@@ -34,8 +34,8 @@
 
 	{% for c in comment_list %}
 	<div class="row">
-	<div class="span2 r-align"><strong>{{ c.commentor }}</strong>: </div>
-	<div class="span8"><p>{{ c.com_text }}</p></div>
+	<div class="span2 r-align"><strong><small><br></small>{{ c.commentor }}</strong>: </div>
+	<div class="span8"><p>{{ c.com_text|linebreaks }}</p></div>
 	</div>
 	{% endfor %}
 {% endif %}
@@ -48,8 +48,9 @@
 	Name:</div> <div class="span7"> <input type="text" class="input-xlarge" name="name" /> </div></div>
 	<div class="row"><div class="span2 r-align">
 	Comment:</div> <div class="span7"> <textarea class="input-xxlarge" name="comtext" rows="8" columns="100"></textarea> </div>
-</div><br>
-	<input type="submit"><br>
+</div>
+	<div class="row"><div class="span3 offset2">
+	<input type="submit"></div></div>
 </form>
 
 </div>
