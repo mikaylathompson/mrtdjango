@@ -3,7 +3,6 @@ bdist-mpkg==0.4.4
 distribute==0.6.45
 dj-database-url==0.2.1
 gunicorn==0.17.4
-include-server==3.1-toolwhip.1
 psycopg2==2.5
 py2app==0.5.3
 python-dateutil==1.5
