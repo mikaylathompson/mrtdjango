@@ -1,0 +1,10 @@
+<h1>{{ post.title }}</h1>
+<h3>By {{ post.author }}</h3>
+<p> {{ post.text }}</p>
+
+{% if comment_list %}
+<br><h2>Comments:</h2>
+	{% for c in comment_list %}
+		<em>{{ c.commentor }}</em>: <p>{{ c.com_text }}</p><br>
+	{% endfor %}
+{% endif %}
