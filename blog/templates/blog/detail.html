@@ -45,9 +45,10 @@
 	{% csrf_token %}
 	<div class="row">
 		<div class="span2 r-align">
-	Name:</div> <div class="span7"> <input type="text" class="input-xlarge" name="name" /> </div></div>
+	Name:</div> <div class="span7"> <h5>{{ user.username }} </div></div>
 	<div class="row"><div class="span2 r-align">
-	Comment:</div> <div class="span7"> <textarea class="input-xxlarge" name="comtext" rows="8" columns="100"></textarea> </div>
+	Comment:</div> <div class="span7"> <textarea class="input-xxlarge" name="comtext" rows="8" columns="100"></textarea> 
+	<input type="hidden" name="name" value="{{ user.username }}" /></div>
 </div>
 	<div class="row"><div class="span3 offset2">
 	<input type="submit"></div></div>

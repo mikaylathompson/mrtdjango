@@ -10,6 +10,7 @@ class Post(models.Model):
 	author = models.CharField(max_length=50)
 	text = models.TextField()
 	edit_date = models.DateTimeField('date last edited')
+	# tags = models.ManyToManyField(Tag)
 
 	def __unicode__(self):
 		return self.title
@@ -44,11 +45,15 @@ class Comment(models.Model):
 	class Meta:
 		ordering = ('com_date',)
 
+
 class Tag(models.Model):
 	posts = models.ManyToManyField(Post)
 	label = models.CharField(max_length=50)
 
 	def __unicode__(self):
 		return self.label
+
+	def popularity(self):
+		return posts.length()
 
 
